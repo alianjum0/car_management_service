@@ -1,0 +1,309 @@
+{
+  "openapi" : "3.0.0",
+  "info" : {
+    "contact" : {
+      "email" : "m.alianjum0@gmail.com"
+    },
+    "description" : "Car management service swagger documentation",
+    "license" : {
+      "name" : "Apache 2.0",
+      "url" : "http://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "title" : "Car Management Service",
+    "version" : "1.0.0"
+  },
+  "externalDocs" : {
+    "description" : "Find out more about Swagger",
+    "url" : "http://swagger.io"
+  },
+  "servers" : [ {
+    "url" : "http://localhost:3000/api"
+  } ],
+  "security" : [ {
+    "ApiKeyAuth" : [ ]
+  } ],
+  "tags" : [ {
+    "description" : "Cars",
+    "name" : "cars"
+  } ],
+  "paths" : {
+    "/cars" : {
+      "get" : {
+        "description" : "The list of cars.\n",
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "items" : {
+                    "$ref" : "#/components/schemas/Car"
+                  },
+                  "type" : "array"
+                }
+              }
+            },
+            "description" : "successful operation"
+          },
+          "400" : {
+            "description" : "Invalid status value"
+          }
+        },
+        "summary" : "List the available cars",
+        "tags" : [ "cars" ]
+      },
+      "post" : {
+        "requestBody" : {
+          "$ref" : "#/components/requestBodies/baseCar",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "properties" : {
+                  "make" : {
+                    "description" : "The car make",
+                    "type" : "string"
+                  },
+                  "color" : {
+                    "description" : "The car color",
+                    "type" : "string"
+                  },
+                  "year" : {
+                    "description" : "The car year",
+                    "type" : "string"
+                  },
+                  "price" : {
+                    "description" : "The car price",
+                    "type" : "string"
+                  }
+                },
+                "required" : [ "title" ],
+                "type" : "object"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Car"
+                }
+              }
+            },
+            "description" : "successful operation"
+          }
+        },
+        "summary" : "Create a car",
+        "tags" : [ "cars" ]
+      }
+    },
+    "/cars/{carId}" : {
+      "get" : {
+        "description" : "Get the car\n",
+        "parameters" : [ {
+          "description" : "The car identifier",
+          "explode" : false,
+          "in" : "path",
+          "name" : "carId",
+          "required" : true,
+          "schema" : {
+            "format" : "int64",
+            "type" : "integer"
+          },
+          "style" : "simple"
+        } ],
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Car"
+                }
+              }
+            },
+            "description" : "successful operation"
+          },
+          "404" : {
+            "description" : "The car does not exist.\n"
+          }
+        },
+        "summary" : "Get the car",
+        "tags" : [ "cars" ]
+      },
+      "delete" : {
+        "description" : "Delete the car\n",
+        "operationId" : "deleteCar",
+        "parameters" : [ {
+          "description" : "The car identifier",
+          "explode" : false,
+          "in" : "path",
+          "name" : "carId",
+          "required" : true,
+          "schema" : {
+            "format" : "int64",
+            "type" : "integer"
+          },
+          "style" : "simple"
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "No content.\n"
+          },
+          "404" : {
+            "description" : "The car does not exist.\n"
+          }
+        },
+        "summary" : "Delete the car",
+        "tags" : [ "cars" ]
+      },
+      "put" : {
+        "description" : "Update the car\n",
+        "parameters" : [ {
+          "description" : "The car identifier",
+          "explode" : false,
+          "in" : "path",
+          "name" : "carId",
+          "required" : true,
+          "schema" : {
+            "format" : "int64",
+            "type" : "integer"
+          },
+          "style" : "simple"
+        } ],
+        "requestBody" : {
+          "$ref" : "#/components/requestBodies/baseCar",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "properties" : {
+                  "make" : {
+                    "description" : "The car make",
+                    "type" : "string"
+                  },
+                  "color" : {
+                    "description" : "The car color",
+                    "type" : "string"
+                  },
+                  "year" : {
+                    "description" : "The car year",
+                    "format" : "int64",
+                    "type" : "integer"
+                  },
+                  "price" : {
+                    "description" : "The car price",
+                    "format" : "int64",
+                    "type" : "integer"
+                  }
+                },
+                "type" : "object"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Car"
+                }
+              }
+            },
+            "description" : "successful operation"
+          },
+          "404" : {
+            "description" : "The car does not exist.\n"
+          }
+        },
+        "summary" : "Update the car",
+        "tags" : [ "cars" ]
+      }
+    }
+  },
+  "components" : {
+    "requestBodies" : {
+      "baseCar" : {
+        "content" : {
+          "application/json" : {
+            "schema" : {
+              "$ref" : "#/components/schemas/baseCar"
+            }
+          }
+        }
+      }
+    },
+    "schemas" : {
+      "Car" : {
+        "example" : {
+          "id": 1,
+          "userId": 1,
+          "make": "Renault",
+          "color": "white",
+          "year": 2021,
+          "price": 19999
+        },
+        "properties" : {
+          "id" : {
+            "description" : "The car identifier",
+            "format" : "int64",
+            "type" : "integer"
+          },
+          "make" : {
+            "description" : "The car make",
+            "type" : "string"
+          },
+          "color" : {
+            "description" : "The car color",
+            "type" : "string"
+          },
+          "year" : {
+            "description" : "The car year",
+            "format" : "int64",
+            "type" : "integer"
+          },
+          "price" : {
+            "description" : "The car price",
+            "format" : "int64",
+            "type" : "integer"
+          }
+        },
+        "required" : [ "id", "make" ],
+        "type" : "object",
+        "xml" : {
+          "name" : "Car"
+        }
+      },
+      "baseCar" : {
+        "properties" : {
+          "make" : {
+            "description" : "The car make",
+            "type" : "string"
+          },
+          "color" : {
+            "description" : "The car color",
+            "type" : "string"
+          },
+          "year" : {
+            "description" : "The car year",
+            "format" : "int64",
+            "type" : "integer"
+          },
+          "price" : {
+            "description" : "The car price",
+            "format" : "int64",
+            "type" : "integer"
+          }
+        },
+        "required" : [ "title" ],
+        "type" : "object"
+      }
+    },
+    "securitySchemes" : {
+        "ApiKeyAuth": {
+          "type": "apiKey",
+          "in": "header",
+          "name": "userid"
+        }
+    }
+  }
+}
