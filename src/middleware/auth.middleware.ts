@@ -5,9 +5,8 @@ export const authHandler = (
   response: Response,
   next: NextFunction
 ) => {
-  const {userid}= request.headers;
 
-  if(!userid){
+  if(!request.headers || !request.headers['userid']){
     const message = "Not authorized";
     return response.status(401).send(message);
   }

@@ -39,7 +39,7 @@ let cars: Cars = {
  */
 export const findAll = async (userId: number): Promise<Car[]> => Object.values(cars).filter(car => car.userId == userId);
 
-export const find = async (userId: number, id: number): Promise<Car> => {
+export const find = async (userId: number, id: number): Promise<Car | null> => {
   return (cars[id] && cars[id].userId == userId) ? cars[id] : null;
 }
 
@@ -64,7 +64,7 @@ export const update = async (
     return null;
   }
 
-  cars[id] = { id, ...carUpdate };
+  cars[id] = { ...carUpdate };
 
   return cars[id];
 };
