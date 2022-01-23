@@ -5,4 +5,5 @@ module.exports = {
   moduleNameMapper: {
     "@App/(.*)": "<rootDir>/src/$1"
   },
+  modulePathIgnorePatterns: ["<rootDir>/bin/"]
 };

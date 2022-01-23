@@ -6,7 +6,7 @@
   "scripts": {
     "test": "ENV_FILE=./config/.env.test jest",
     "build": "tsc",
-    "start": "node ./bin/app.js",
+    "start": "node ./bin/index.js",
     "dev": "ts-node-dev --respawn --pretty --transpile-only src/index.ts"
   },
   "keywords": [],
