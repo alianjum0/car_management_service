@@ -2,6 +2,9 @@
 *.swp
 tags
 
+# JS build files
+bin
+
 # Logs
 logs
 *.log
