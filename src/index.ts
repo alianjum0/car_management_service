@@ -10,8 +10,8 @@ import { carsRouter } from "./cars/cars.router";
 import { errorHandler } from "./middleware/error.middleware";
 import { notFoundHandler } from "./middleware/not-found.middleware";
 import { authHandler } from "./middleware/auth.middleware";
-import swaggerUi = require('swagger-ui-express');
-import fs = require('fs');
+import swaggerUi = require("swagger-ui-express");
+import fs = require("fs");
 
 dotenv.config();
 
@@ -20,7 +20,7 @@ dotenv.config();
  */
 
 if (!process.env.PORT) {
-   process.exit(1);
+  process.exit(1);
 }
 
 const PORT: number = parseInt(process.env.PORT as string, 10);
@@ -28,8 +28,8 @@ const PORT: number = parseInt(process.env.PORT as string, 10);
 const app = express();
 
 /* Swagger files start */
-const swaggerFile: string = (process.cwd()+"/src/api/swagger.json");
-const swaggerData: string = fs.readFileSync(swaggerFile, 'utf8');
+const swaggerFile: string = process.cwd() + "/src/api/swagger.json";
+const swaggerData: string = fs.readFileSync(swaggerFile, "utf8");
 const swaggerDocument = JSON.parse(swaggerData);
 /* Swagger files end */
 
@@ -42,8 +42,7 @@ app.use(cors());
 app.use(express.json());
 
 // swagger docs
-app.use('/api/docs', swaggerUi.serve,
-  swaggerUi.setup(swaggerDocument));
+app.use("/api/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use(authHandler);
 
