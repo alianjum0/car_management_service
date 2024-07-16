@@ -16,7 +16,7 @@ import fs = require("fs");
 dotenv.config();
 
 /**
- * App Variables
+ * App Variable
  */
 
 if (!process.env.PORT) {
